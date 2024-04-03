@@ -1,0 +1,260 @@
+
+
+import com.google.gson.annotations.Expose;
+
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class UdsMainBody {
+    @Expose
+    private List<UdsProgram> programs;
+
+    @Expose
+    private String measurementPeriodStartDate;
+
+    @Expose
+    private String measurementPeriodEndDate;
+
+    public UdsMainBody() {
+        int yearValue = Year.now().getValue();
+        this.measurementPeriodStartDate = LocalDate.of(yearValue,1,1).format(DateTimeFormatter.ofPattern("mm/dd/yyyy"));
+        this.measurementPeriodEndDate = LocalDate.of(yearValue,12,31).format(DateTimeFormatter.ofPattern("mm/dd/yyyy"));
+    }
+
+    public UdsMainBody( String measurementPeriodStartDate, String measurementPeriodEndDate) {
+        this.measurementPeriodStartDate = measurementPeriodStartDate;
+        this.measurementPeriodEndDate = measurementPeriodEndDate;
+        programs = new ArrayList<>();
+
+    }
+
+    public String getMeasurementPeriodStartDate() {
+        return measurementPeriodStartDate;
+    }
+
+    public void setMeasurementPeriodStartDate(String measurementPeriodStartDate) {
+        this.measurementPeriodStartDate = measurementPeriodStartDate;
+    }
+
+    public String getMeasurementPeriodEndDate() {
+        return measurementPeriodEndDate;
+    }
+
+    public void setMeasurementPeriodEndDate(String measurementPeriodEndDate) {
+        this.measurementPeriodEndDate = measurementPeriodEndDate;
+    }
+
+    public List<UdsProgram> getPrograms() {
+        return new LinkedList<>(programs);
+    }
+
+    public void setPrograms(List<UdsProgram> programs) {
+        this.programs = new LinkedList<>(programs);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import com.google.gson.annotations.Expose;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UdsMeasure {
+    @Expose
+    private String fqn;
+    @Expose
+    private String name;
+    @Expose
+    private String outcome;
+    @Expose
+    private List<UdsSupportingFact> supporting_facts;
+    @Expose
+    private String ordersetEncId;
+    @Expose
+    private String osSelectionType;
+
+    @Expose
+    private String itemName;
+
+    public UdsMeasure() {
+    }
+
+    public UdsMeasure(String fqn, String name, String outcome, String ordersetEncId, String osSelectionType) {
+        this.fqn = fqn;
+        this.name = name;
+        this.outcome = outcome;
+        this.ordersetEncId = ordersetEncId;
+        this.osSelectionType = osSelectionType;
+        supporting_facts = new ArrayList<>();
+        itemName = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
+    }
+
+    public List<UdsSupportingFact> getUdsSupportingFacts() {
+        return new ArrayList<>(supporting_facts);
+    }
+
+    public void setUdsSupportingFacts(List<UdsSupportingFact> supportingFacts) {
+        supporting_facts = new ArrayList<>(supportingFacts);
+    }
+
+    public String getOrdersetEncId() {
+        return ordersetEncId;
+    }
+
+    public void setOrdersetEncId(String ordersetEncId) {
+        this.ordersetEncId = ordersetEncId;
+    }
+
+    public String getOsSelectionType() {
+        return osSelectionType;
+    }
+
+    public void setOsSelectionType(String osSelectionType) {
+        this.osSelectionType = osSelectionType;
+    }
+
+    public String getFqn() {
+        return fqn;
+    }
+
+    public void setFqn(String fqn) {
+        this.fqn = fqn;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import com.google.gson.annotations.Expose;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UdsProgram {
+    @Expose
+    private String programName;
+    @Expose
+    private List<UdsMeasure> measures;
+
+    public UdsProgram() {
+    }
+
+    public UdsProgram(String programName) {
+        this.programName = programName;
+        measures = new ArrayList<>();
+    }
+
+    public String getProgramName() {
+        return programName;
+    }
+
+    public void setProgramName(String programName) {
+        this.programName = programName;
+    }
+
+    public List<UdsMeasure> getUdsMeasures() {
+        return new ArrayList<>(measures);
+    }
+
+    public void setUdsMeasures(List<UdsMeasure> measures) {
+        this.measures = new ArrayList<>(measures);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+import com.google.gson.annotations.Expose;
+
+public class UdsSupportingFact {
+    @Expose
+    private String name;
+
+    public UdsSupportingFact() {
+    }
+
+    public UdsSupportingFact(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
